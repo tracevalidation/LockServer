@@ -10,9 +10,9 @@ __pycache__
 .vscode/
 
 # temporary trace and clock
-Traces/
+target/
 trace.ndjson
-r*.ndjson
+c*.ndjson
 s*.ndjson
 *.clock
 default
