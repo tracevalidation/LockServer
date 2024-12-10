@@ -10,16 +10,18 @@ import org.lbee.network.TimeOutException;
 
 public class Client extends Agent {
 
-    /**
-     * Possible states of client
-     */
-    enum ClientState {
-        acquireLock,
-        criticalSection,
-        unlock
-    }
+    // possible values for the state of the client
+    // private static final String ACQUIRE_LOCK = "acquireLock";
+    private static final String CRITICAL_SECTION = "criticalSection";
+    private static final String UNLOCK = "unlock";
+    private static final String DONE = "Done";
 
-    private final static int PROBABILITY_TO_ABORT = 100;
+    // possible client actions
+    private static final String DO_ACQUIRE_LOCK = "acquireLock";
+    private static final String DO_CRITICAL_SECTION = "criticalSection";
+    private static final String DO_UNLOCK = "unlock";
+
+    // private final static int PROBABILITY_TO_ABORT = 100;
     private static final int MAX_TASK_DURATION = 10;
     // Abort if no message from SERVER for ABORT_TIMEOUT
     private final static int ABORT_TIMEOUT = 2000; //200
@@ -106,8 +108,8 @@ public class Client extends Agent {
 
     private void sendRequest() throws IOException {
         // trace the state change
-        // traceState.update("criticalSection");
-        tracer.log("acquireLock");
+        traceState.update(CRITICAL_SECTION);
+        tracer.log(DO_ACQUIRE_LOCK);
 
         this.networkManager.send(new Message(
                 this.name, this.serverName, ClientServerMessage.LockMsg.toString(), 0));
@@ -123,8 +125,8 @@ public class Client extends Agent {
     private void handleMessage(Message message) throws IOException {
         if (message.getContent().equals(ClientServerMessage.GrantMsg.toString())) {
             // trace the state change
-            // traceState.update("unlock");
-            tracer.log("criticalSection");
+            traceState.update(UNLOCK);
+            tracer.log(DO_CRITICAL_SECTION);
             // this.traceState.update(this.state.toString().toLowerCase(Locale.ROOT));
             // tracer.log("RMRcvCommitMsg", new Object[]{this.name});
             System.out.println("Client " + this.name + " received " + ClientServerMessage.GrantMsg.toString());
@@ -137,8 +139,8 @@ public class Client extends Agent {
 
     private void sendUnlock() throws IOException {
         // trace the state change
-        // traceState.update("Done");
-        tracer.log("unlock");
+        traceState.update(DONE);
+        tracer.log(DO_UNLOCK);
         this.networkManager.send(new Message(
                 this.name, this.serverName, ClientServerMessage.UnlockMsg.toString(), 0));
         System.out.println("Client " + this.name + " sent " + ClientServerMessage.UnlockMsg.toString());

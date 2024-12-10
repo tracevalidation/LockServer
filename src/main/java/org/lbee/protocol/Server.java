@@ -12,6 +12,13 @@ import org.lbee.network.TimeOutException;
 
 public class Server extends Agent {
 
+    // possible values for the state of the server
+    private static final String SENDING_RESPONSE = "sendingResponse";
+    private static final String WAITING = "waiting";
+    //possible server actions
+    private static final String DO_SERVER_RECEIVE = "serverReceive";
+    private static final String DO_SERVER_RESPOND = "serverRespond";
+
     // Timeout for receiving messages
     private final static int RECEIVE_TIMEOUT = 100;
     // Abort if not all RMs sent before ABORT_TIMEOUT
@@ -93,8 +100,8 @@ public class Server extends Agent {
     private Message receiveMessage() throws TimeOutException, IOException {
         Message message = networkManager.receive(this.name, RECEIVE_TIMEOUT);
         // trace the state change
-        // traceState.update("sendingResponse");
-        tracer.log("serverReceive"); 
+        traceState.update(SENDING_RESPONSE);
+        tracer.log(DO_SERVER_RECEIVE); 
         return message;
     }
 
@@ -108,8 +115,8 @@ public class Server extends Agent {
             }
             this.clients.add(message.getFrom());
             // trace the state change
-            // traceState.update("waiting");
-            tracer.log("serverRespond"); 
+            traceState.update(WAITING);
+            tracer.log(DO_SERVER_RESPOND); 
         } else {
             if (message.getContent().equals(ClientServerMessage.UnlockMsg.toString())) {
                 this.clients.remove(message.getFrom());
@@ -117,8 +124,8 @@ public class Server extends Agent {
                     this.networkManager.send(new Message(this.name, clients.get(0), ClientServerMessage.GrantMsg.toString(), 0));
                 }
                 // trace the state change
-                // traceState.update("waiting");
-                tracer.log("serverRespond"); 
+                traceState.update(WAITING);
+                tracer.log(DO_SERVER_RESPOND); 
             } else {
                 System.out.println("Unxpected message: " + message);
             }
