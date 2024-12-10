@@ -99,13 +99,13 @@ serverReceive(self) == /\ serverState[self] = "waiting"
                        /\ UNCHANGED << clientState, hasLock, queue, resp >>
 
 serverRespond(self) == /\ serverState[self] = "sendingResponse"
-                       /\ IF (msg[self].type) = (LockMsg)
+                       /\ IF (msg[self].type) = LockMsg
                              THEN /\ IF (queue[self]) = (<<>>)
                                         THEN /\ network' = [network EXCEPT ![msg[self].from] = Append(network[msg[self].from], GrantMsg)]
                                              /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
                                         ELSE /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
                                              /\ UNCHANGED network
-                             ELSE /\ IF (msg[self].type) = (UnlockMsg)
+                             ELSE /\ IF (msg[self].type) = UnlockMsg
                                         THEN /\ queue' = [queue EXCEPT ![self] = Tail(queue[self])]
                                              /\ IF (queue'[self]) # (<<>>)
                                                    THEN /\ network' = [network EXCEPT ![Head(queue'[self])] = Append(network[Head(queue'[self])], GrantMsg)]

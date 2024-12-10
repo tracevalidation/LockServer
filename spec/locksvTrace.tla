@@ -63,7 +63,7 @@ ISserverRespond ==
         IF "event_args" \in DOMAIN logline /\ Len(logline.event_args) >= 1 THEN
             serverRespond(logline.event_args[1])
         ELSE
-            serverReceive(TraceServer)
+            serverRespond(TraceServer)
 
 ISacquireLock ==
     /\ IsEvent("acquireLock")
