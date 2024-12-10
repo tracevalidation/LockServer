@@ -1,0 +1,19 @@
+### TLA ###
+states/
+*.bin
+*.out
+spec/*.out
+
+# local
+__pycache__
+.DS_Store
+.vscode/
+
+# temporary trace and clock
+Traces/
+trace.ndjson
+r*.ndjson
+s*.ndjson
+*.clock
+default
+
