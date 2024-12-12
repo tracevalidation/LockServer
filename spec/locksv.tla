@@ -1,6 +1,6 @@
 ------------------------------ MODULE locksv ------------------------------
 
-EXTENDS Naturals, Sequences, TLC, FiniteSets
+EXTENDS Naturals, Sequences, TLC, FiniteSets, Bags
 
 CONSTANT Clients, Server
 
@@ -81,7 +81,8 @@ vars == << serverState, clientState, network, hasLock, msg, queue, resp >>
 ProcSet == (ServerSet) \cup (ClientSet)
 
 LOCKsvInit == (* Global variables *)
-        /\ network = [id \in NodeSet |-> <<>>]
+        \* /\ network = [id \in NodeSet |-> <<>>]
+        /\ network = [id \in NodeSet |-> EmptyBag]
         /\ hasLock = [id \in NodeSet |-> FALSE]
         (* Process Server *)
         /\ msg = [self \in ServerSet |-> [from |-> "s", type |-> LockMsg]]
@@ -92,23 +93,31 @@ LOCKsvInit == (* Global variables *)
         /\ clientState = [c \in ClientSet |-> "acquireLock"]
 
 serverReceive(self) == /\ serverState[self] = "waiting"
-                       /\ (Len(network[self])) > (0)
-                       /\ msg' = [msg EXCEPT ![self] = Head(network[self])]
-                       /\ network' = [network EXCEPT ![self] = Tail(network[self])]
+                        \*    /\ (Len(network[self])) > (0)
+                        \*    /\ msg' = [msg EXCEPT ![self] = Head(network[self])]
+                        \*    /\ network' = [network EXCEPT ![self] = Tail(network[self])]
+                       /\ \E __m__ \in DOMAIN network[self]:
+                            /\ msg' = [msg EXCEPT ![self] = __m__]
+                            /\ network' = [network EXCEPT ![self] = @ (-) SetToBag({__m__})]
                        /\ serverState' = [serverState EXCEPT ![self] = "sendingResponse"]
                        /\ UNCHANGED << clientState, hasLock, queue, resp >>
 
 serverRespond(self) == /\ serverState[self] = "sendingResponse"
                        /\ IF (msg[self].type) = LockMsg
                              THEN /\ IF (queue[self]) = (<<>>)
-                                        THEN /\ network' = [network EXCEPT ![msg[self].from] = Append(network[msg[self].from], GrantMsg)]
-                                             /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
-                                        ELSE /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
-                                             /\ UNCHANGED network
+                                        THEN 
+                                            \* /\ network' = [network EXCEPT ![msg[self].from] = Append(network[msg[self].from], GrantMsg)]
+                                            /\ network' = [network EXCEPT ![msg[self].from] = @ (+) SetToBag({GrantMsg})]
+                                            /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
+                                        ELSE 
+                                            /\ queue' = [queue EXCEPT ![self] = Append(queue[self], msg[self].from)]
+                                            /\ UNCHANGED network
                              ELSE /\ IF (msg[self].type) = UnlockMsg
                                         THEN /\ queue' = [queue EXCEPT ![self] = Tail(queue[self])]
                                              /\ IF (queue'[self]) # (<<>>)
-                                                   THEN /\ network' = [network EXCEPT ![Head(queue'[self])] = Append(network[Head(queue'[self])], GrantMsg)]
+                                                   THEN 
+                                                        \* /\ network' = [network EXCEPT ![Head(queue'[self])] = Append(network[Head(queue'[self])], GrantMsg)]
+                                                        /\ network' = [network EXCEPT ![Head(queue'[self])] = @ (+) SetToBag({GrantMsg})]
                                                    ELSE /\ TRUE
                                                         /\ UNCHANGED network
                                         ELSE /\ TRUE
@@ -119,22 +128,27 @@ serverRespond(self) == /\ serverState[self] = "sendingResponse"
 server(self) == serverReceive(self) \/ serverRespond(self)
 
 acquireLock(self) == /\ clientState[self] = "acquireLock"
-                     /\ network' = [network EXCEPT ![Server] = Append(network[Server], [from |-> self, type |-> LockMsg])]
+                    \*  /\ network' = [network EXCEPT ![Server] = Append(network[Server], [from |-> self, type |-> LockMsg])]
+                     /\ network' = [network EXCEPT ![Server] = @ (+) SetToBag({[from |-> self, type |-> LockMsg]})]
                      /\ clientState' = [clientState EXCEPT ![self] = "criticalSection"]
                      /\ UNCHANGED << serverState, hasLock, msg, queue, resp >>
 
 criticalSection(self) == /\ clientState[self] = "criticalSection"
-                         /\ (Len(network[self])) > (0)
-                         /\ resp' = [resp EXCEPT ![self] = Head(network[self])]
-                         /\ network' = [network EXCEPT ![self] = Tail(network[self])]
-                         /\ Assert((resp'[self]) = (GrantMsg), "Unexpected message")
-                         /\ hasLock' = [hasLock EXCEPT ![self] = TRUE]
-                         /\ clientState' = [clientState EXCEPT ![self] = "unlock"]
-                         /\ UNCHANGED << serverState, msg, queue >>
+                        \*  /\ (Len(network[self])) > (0)
+                        \*  /\ resp' = [resp EXCEPT ![self] = Head(network[self])]
+                        \*  /\ network' = [network EXCEPT ![self] = Tail(network[self])]
+                        /\ \E __m__ \in DOMAIN network[self]:
+                            /\ resp' = [resp EXCEPT ![self] = __m__]
+                            /\ network' = [network EXCEPT ![self] = @ (-) SetToBag({__m__})]
+                        /\ Assert((resp'[self]) = (GrantMsg), "Unexpected message")
+                        /\ hasLock' = [hasLock EXCEPT ![self] = TRUE]
+                        /\ clientState' = [clientState EXCEPT ![self] = "unlock"]
+                        /\ UNCHANGED << serverState, msg, queue >>
 
 unlock(self) == /\ clientState[self] = "unlock"
                 /\ hasLock' = [hasLock EXCEPT ![self] = FALSE]
-                /\ network' = [network EXCEPT ![Server] = Append(network[Server], [from |-> self, type |-> UnlockMsg])]
+                \* /\ network' = [network EXCEPT ![Server] = Append(network[Server], [from |-> self, type |-> UnlockMsg])]
+                /\ network' = [network EXCEPT ![Server] = @ (+) SetToBag({[from |-> self, type |-> UnlockMsg]})]
                 /\ clientState' = [clientState EXCEPT ![self] = "Done"]
                 /\ UNCHANGED << serverState, msg, queue, resp >>
 
