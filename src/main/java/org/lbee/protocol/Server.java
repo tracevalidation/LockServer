@@ -9,6 +9,7 @@ import org.lbee.instrumentation.trace.TLATracer;
 import org.lbee.instrumentation.trace.VirtualField;
 import org.lbee.network.NetworkManager;
 import org.lbee.network.TimeOutException;
+import org.lbee.tla.FromMessageTLA;
 
 public class Server extends Agent {
 
@@ -33,7 +34,7 @@ public class Server extends Agent {
 
     // Tracing variables
     private final VirtualField traceState;
-    // private final VirtualField traceMessage;
+    private final VirtualField traceMessage;
     // private final VirtualField traceQueue;
     // private final VirtualField traceNetwork;
 
@@ -46,7 +47,7 @@ public class Server extends Agent {
             this.initDuration = initDuration;
         }
         this.traceState = tracer.getVariableTracer("serverState").getField(this.name);
-        // this.traceMessage = tracer.getVariableTracer("msg").getField(this.name);
+        this.traceMessage = tracer.getVariableTracer("msg").getField(this.name);
         // this.traceQueue = tracer.getVariableTracer("queue").getField(this.name);
         // this.traceNetwork = tracer.getVariableTracer("network").getField(this.name);
     }
@@ -101,7 +102,9 @@ public class Server extends Agent {
         Message message = networkManager.receive(this.name, RECEIVE_TIMEOUT);
         // trace the state change
         traceState.update(SENDING_RESPONSE);
-        tracer.log(DO_SERVER_RECEIVE); 
+        // since "from" and "type" fields have different types, we can't use a Map like JSON serialization 
+        traceMessage.update(new FromMessageTLA(message.getFrom(), message.getContent()));
+        tracer.log(DO_SERVER_RECEIVE);
         return message;
     }
 
@@ -116,7 +119,7 @@ public class Server extends Agent {
             this.clients.add(message.getFrom());
             // trace the state change
             traceState.update(WAITING);
-            tracer.log(DO_SERVER_RESPOND); 
+            tracer.log(DO_SERVER_RESPOND);
         } else {
             if (message.getContent().equals(ClientServerMessage.UnlockMsg.toString())) {
                 this.clients.remove(message.getFrom());
@@ -125,7 +128,7 @@ public class Server extends Agent {
                 }
                 // trace the state change
                 traceState.update(WAITING);
-                tracer.log(DO_SERVER_RESPOND); 
+                tracer.log(DO_SERVER_RESPOND);
             } else {
                 System.out.println("Unxpected message: " + message);
             }
