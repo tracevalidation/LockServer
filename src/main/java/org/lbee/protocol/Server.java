@@ -104,7 +104,7 @@ public class Server extends Agent {
         traceState.update(SENDING_RESPONSE);
         // since "from" and "type" fields have different types, we can't use a Map like JSON serialization 
         traceMessage.update(new FromMessageTLA(message.getFrom(), message.getContent()));
-        tracer.log(DO_SERVER_RECEIVE);
+        tracer.log(DO_SERVER_RECEIVE, new Object[]{this.name});
         return message;
     }
 
@@ -119,7 +119,7 @@ public class Server extends Agent {
             this.clients.add(message.getFrom());
             // trace the state change
             traceState.update(WAITING);
-            tracer.log(DO_SERVER_RESPOND);
+            tracer.log(DO_SERVER_RESPOND, new Object[]{this.name});
         } else {
             if (message.getContent().equals(ClientServerMessage.UnlockMsg.toString())) {
                 this.clients.remove(message.getFrom());
@@ -128,7 +128,7 @@ public class Server extends Agent {
                 }
                 // trace the state change
                 traceState.update(WAITING);
-                tracer.log(DO_SERVER_RESPOND);
+                tracer.log(DO_SERVER_RESPOND, new Object[]{this.name});
             } else {
                 System.out.println("Unxpected message: " + message);
             }

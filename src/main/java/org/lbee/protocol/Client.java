@@ -109,7 +109,7 @@ public class Client extends Agent {
     private void sendRequest() throws IOException {
         // trace the state change
         traceState.update(CRITICAL_SECTION);
-        tracer.log(DO_ACQUIRE_LOCK);
+        tracer.log(DO_ACQUIRE_LOCK, new Object[]{this.name});
 
         this.networkManager.send(new Message(
                 this.name, this.serverName, ClientServerMessage.LockMsg.toString(), 0));
@@ -126,9 +126,7 @@ public class Client extends Agent {
         if (message.getContent().equals(ClientServerMessage.GrantMsg.toString())) {
             // trace the state change
             traceState.update(UNLOCK);
-            tracer.log(DO_CRITICAL_SECTION);
-            // this.traceState.update(this.state.toString().toLowerCase(Locale.ROOT));
-            // tracer.log("RMRcvCommitMsg", new Object[]{this.name});
+            tracer.log(DO_CRITICAL_SECTION, new Object[]{this.name});
             System.out.println("Client " + this.name + " received " + ClientServerMessage.GrantMsg.toString());
             this.working();
         } else {
@@ -140,7 +138,7 @@ public class Client extends Agent {
     private void sendUnlock() throws IOException {
         // trace the state change
         traceState.update(DONE);
-        tracer.log(DO_UNLOCK);
+        tracer.log(DO_UNLOCK, new Object[]{this.name});
         this.networkManager.send(new Message(
                 this.name, this.serverName, ClientServerMessage.UnlockMsg.toString(), 0));
         System.out.println("Client " + this.name + " sent " + ClientServerMessage.UnlockMsg.toString());
