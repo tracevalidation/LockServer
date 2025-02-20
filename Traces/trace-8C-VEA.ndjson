@@ -1,0 +1,56 @@
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c1"]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c4"]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c3"]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c2"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c1", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c8"]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c5"]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c7"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c4", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c3", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["criticalSection"]}], "event": "acquireLock", "event_args": ["c6"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c2", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c1"]}
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["Done"]}], "event": "unlock", "event_args": ["c1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c1", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c7", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c4"]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["Done"]}], "event": "unlock", "event_args": ["c4"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c6", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c4", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c5", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c8", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c3"]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["Done"]}], "event": "unlock", "event_args": ["c3"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c3", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c2"]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["Done"]}], "event": "unlock", "event_args": ["c2"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c2", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c7"]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["Done"]}], "event": "unlock", "event_args": ["c7"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c7", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c6"]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["Done"]}], "event": "unlock", "event_args": ["c6"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c6", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c5"]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["Done"]}], "event": "unlock", "event_args": ["c5"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c5", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["unlock"]}], "event": "criticalSection", "event_args": ["c8"]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["Done"]}], "event": "unlock", "event_args": ["c8"]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c8", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}], "event": "serverReceive", "event_args": ["s1"]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}], "event": "serverRespond", "event_args": ["s1"]}

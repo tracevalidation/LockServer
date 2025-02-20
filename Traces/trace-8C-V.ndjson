@@ -1,0 +1,56 @@
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["criticalSection"]}]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["criticalSection"]}]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["criticalSection"]}]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["criticalSection"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c1", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["criticalSection"]}]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["criticalSection"]}]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["criticalSection"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c4", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c3", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["criticalSection"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c2", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c1"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c1", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c7", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c4"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c6", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c4", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c5", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c8", "type": 1}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c3"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c3", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c2"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c2", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c7"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c7", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c6"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c6", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c5"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c5", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["unlock"]}]}
+{"clientState": [{"op": "Update", "path": ["c8"], "args": ["Done"]}]}
+{"msg": [{"op": "Update", "path": ["s1"], "args": [{"from": "c8", "type": 2}]}], "serverState": [{"op": "Update", "path": ["s1"], "args": ["sendingResponse"]}]}
+{"serverState": [{"op": "Update", "path": ["s1"], "args": ["waiting"]}]}
